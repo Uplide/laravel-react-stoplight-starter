@@ -1,0 +1,48 @@
+name: 🚀 Deploy to Production
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2
+
+      - name: 🛠️ Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18.19.1"
+
+      - name: 🔐 Add .env file
+        run: |
+          echo "${{secrets.TEST_REACT_ENV}}" >> dashboard/.env
+
+      - name: 📂 Install Node dependencies
+        run: |
+          cd dashboard
+          npm install --legacy-peer-deps
+
+      - name: 🏗️ Build project
+        run: |
+          cd dashboard
+          chmod +x build.sh
+          npm run build
+
+      - name: 📂 Install PHP dependencies
+        uses: php-actions/composer@v6
+        with:
+          php_version: "8.2"
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{secrets.FTP_SERVER}}
+          username: ${{secrets.FTP_USERNAME}}
+          password: ${{secrets.FTP_PASS}}
+          server-dir: /
+          exclude: |
+            dashboard/**
+            .git/**

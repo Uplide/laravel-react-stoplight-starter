@@ -1,0 +1,318 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "İşim Sağlık",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/create-role": {
+            "post": {
+                "tags": [
+                    "Dashboard > Role Management"
+                ],
+                "summary": "Create a new role",
+                "operationId": "75be6a64c8e9944e238fd39e9421ed01",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "admin"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Role created successfully"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/create-permission": {
+            "post": {
+                "tags": [
+                    "Dashboard > Role Management"
+                ],
+                "summary": "Create a new permission",
+                "operationId": "1ed3ce9a07970f1b9d2d4f5d4d69c577",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "edit articles"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Permission created successfully"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/assign-role": {
+            "post": {
+                "tags": [
+                    "Dashboard > Role Management"
+                ],
+                "summary": "Assign a role to a user",
+                "operationId": "072a2be07c3cf7b7e8ef7419b77db538",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "user_id",
+                                    "role"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "example": "admin"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Role assigned successfully"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/assign-permission": {
+            "post": {
+                "tags": [
+                    "Dashboard > Role Management"
+                ],
+                "summary": "Assign a permission to a role",
+                "operationId": "affc5d5338126c5a8da88f6422021c2b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "role",
+                                    "permission"
+                                ],
+                                "properties": {
+                                    "role": {
+                                        "type": "string",
+                                        "example": "admin"
+                                    },
+                                    "permission": {
+                                        "type": "string",
+                                        "example": "edit articles"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Permission assigned successfully"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AdminDto": {
+                "title": "Admin",
+                "required": [
+                    "id",
+                    "first_name",
+                    "last_name",
+                    "email",
+                    "phone",
+                    "phone_code",
+                    "account_status",
+                    "created_at"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "svm2yb3aeq"
+                    },
+                    "first_name": {
+                        "type": "string",
+                        "example": "feyyaz"
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "example": "Admin"
+                    },
+                    "image": {
+                        "type": "string",
+                        "example": "feyyaz"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "dev@feyyaz.com.tr"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "905429322605"
+                    },
+                    "phone_code": {
+                        "type": "string",
+                        "example": "+90"
+                    },
+                    "account_status": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "FilterGroupDto": {
+                "title": "Filter Group",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/FilterGroupItemDto"
+                        }
+                    },
+                    "totalCount": {
+                        "type": "integer",
+                        "example": 100
+                    }
+                },
+                "type": "object"
+            },
+            "FilterGroupItemDto": {
+                "title": "Filter Group Item",
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "example": "Konutkonfor"
+                    }
+                },
+                "type": "object"
+            },
+            "FilterMetaDto": {
+                "title": "Filter Meta",
+                "properties": {
+                    "totalItems": {
+                        "type": "integer",
+                        "example": 100
+                    },
+                    "itemCount": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "itemsPerPage": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "currentPage": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "parameters": {
+            "skip": {
+                "name": "skip",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "example": 1
+                }
+            },
+            "take": {
+                "name": "take",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "example": 10
+                }
+            },
+            "sort": {
+                "name": "sort",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "example": "yourSelector,asc"
+                }
+            },
+            "filter": {
+                "name": "filter",
+                "in": "query",
+                "description": "Array string",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "group": {
+                "name": "group",
+                "in": "query",
+                "description": "Array object",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
