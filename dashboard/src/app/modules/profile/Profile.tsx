@@ -17,6 +17,7 @@ import { updateAdmin } from "./core/api/admin.request";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import ReactPhoneInput from "../../../base/components/common/inputs/PhoneInput";
 
 const validationSchema = Yup.object().shape({
     name: Yup.string().required("Ad alanı zorunludur"),
@@ -30,21 +31,27 @@ const Profile = () => {
     const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
-            email: currentUser?.data.email,
-            name: currentUser?.data.name,
+            email: currentUser?.data?.email,
+            name: currentUser?.data?.name,
+            surname: currentUser?.data?.surname,
+            phone: currentUser?.data?.phone ?? "90",
+            phone_code: currentUser?.data?.phone_code ?? "+90",
             password: "",
             password_confirmation: "",
         } as IAdminCreateRequest,
         validationSchema: validationSchema,
         enableReinitialize: true,
         onSubmit: (values) => {
-            updateAdmin({
-                id: currentUser?.data.id ?? 0,
-                data: values,
-            }).then(() => {
-                toast.success("Yönetici başarıyla güncellendi");
-                navigate(-1);
-            });
+            if (currentUser?.data?.id) {
+                updateAdmin({
+                    id: parseInt(currentUser?.data.id),
+                    data: values,
+                }).then(() => {
+                    toast.success("Yönetici başarıyla güncellendi");
+                    navigate(-1);
+                });
+            }
+
         },
     });
 
@@ -61,9 +68,9 @@ const Profile = () => {
                                     name={
                                         currentUser?.data.name?.charAt(0) ??
                                         "" +
-                                            currentUser?.data.name
-                                                .split(" ")?.[1]
-                                                ?.charAt(0) ??
+                                        currentUser?.data.name
+                                            .split(" ")?.[1]
+                                            ?.charAt(0) ??
                                         ""
                                     }
                                     showFallback
@@ -129,6 +136,28 @@ const Profile = () => {
                                     </div>
                                     <div className="mb-3">
                                         <label
+                                            htmlFor="name"
+                                            className="block mb-2 text-sm font-normal text-gray-600 "
+                                        >
+                                            Soyad*
+                                        </label>
+                                        <Input
+                                            type="text"
+                                            id="surname"
+                                            name="surname"
+                                            placeholder="Doe"
+                                            value={formik.values.surname}
+                                            onChange={formik.handleChange}
+                                        />
+                                        {formik.touched.surname &&
+                                            formik.errors.surname && (
+                                                <p className="mt-2 text-sm text-red-500">
+                                                    {formik.errors.surname}
+                                                </p>
+                                            )}
+                                    </div>
+                                    <div className="mb-3">
+                                        <label
                                             htmlFor="email"
                                             className="block mb-2 text-sm font-normal text-gray-600 "
                                         >
@@ -148,6 +177,38 @@ const Profile = () => {
                                                     {formik.errors.email}
                                                 </p>
                                             )}
+                                    </div>
+                                    <div className="mb-3">
+                                        <label
+                                            htmlFor="name"
+                                            className="block mb-2 text-sm font-normal text-gray-600 "
+                                        >
+                                            Telefon Numarası
+                                        </label>
+                                        <ReactPhoneInput
+                                            withCode
+                                            value={formik.values.phone}
+                                            name="phone"
+                                            onChange={(e) => {
+                                                formik.setFieldValue(
+                                                    "phone",
+                                                    e.target.value.phone
+                                                );
+                                                formik.setFieldValue(
+                                                    "phone_code",
+                                                    "+" +
+                                                    e.target.value
+                                                        .phone_code
+                                                );
+                                            }}
+                                            id="phone"
+                                        />
+                                        {formik.touched.phone &&
+                                            formik.errors.phone ? (
+                                            <p className="mt-2 text-sm text-red-500">
+                                                {formik.errors.phone}
+                                            </p>
+                                        ) : null}
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -208,7 +269,7 @@ const Profile = () => {
                                         isLoading={formik.isSubmitting}
                                         type="submit"
                                         color="primary"
-                                        // loader={formik.isSubmitting}
+                                    // loader={formik.isSubmitting}
                                     >
                                         Kaydet
                                     </Button>

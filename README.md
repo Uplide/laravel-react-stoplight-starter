@@ -1,3 +1,3 @@
-https://github.com/Uplide/laravel-react-stoplight-starter
+# uplide-laravel
 
-# laravel-react-stoplight-starter
+https://github.com/uplide/uplide-laravel

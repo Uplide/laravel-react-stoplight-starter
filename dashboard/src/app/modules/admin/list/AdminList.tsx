@@ -1,7 +1,6 @@
 import React from "react";
 import { FetchStatus } from "@base/enums/api.enum";
 import { deleteAdmin, fetchAdmins } from "../core/api/admin.request";
-import { IAdminResponseP } from "../core/models/admin.interface";
 import Loader from "@base/layout/components/loader/Loader";
 import { PageableResponseModel } from "@app/core/models/app.interfaces";
 
@@ -21,10 +20,11 @@ import {
     hasPermission,
     hasPermissionMany,
 } from "@base/helpers/permissions/permission.helper";
+import { IAdminResponse } from "../core/models/admin.interface";
 
 const AdminList = () => {
     const [adminListResponse, setAdminListResponse] = React.useState<
-        PageableResponseModel<IAdminResponseP> | undefined
+        PageableResponseModel<IAdminResponse> | undefined
     >();
     const navigate = useNavigate();
     const [fetchStatus, setFetchStatus] = React.useState<FetchStatus>(
@@ -88,7 +88,7 @@ const AdminList = () => {
 
     if (
         hasPermissionMany(
-            `${ERole.ADMIN_UPDATE},${ERole.ADMIN_DELETE},${ERole.ADMIN_ROLE}`
+            `${ERole.ADMIN_UPDATE},${ERole.ADMIN_DELETE},${ERole.ADMIN_VIEW_ROLE},${ERole.ADMIN_UPDATE_ROLE}`
         )
     ) {
         columns.push({
@@ -133,7 +133,7 @@ const AdminList = () => {
                     handle: (id) => {
                         navigate(`/yoneticiler/yetki/${id}`);
                     },
-                    role: ERole.ADMIN_ROLE,
+                    role: ERole.ADMIN_VIEW_ROLE,
                 },
             ],
         });

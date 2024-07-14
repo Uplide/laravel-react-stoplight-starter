@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Royalmind',
                 'surname' => 'App',
-                'email' => 'dev@uplidelaravel.com',
+                'email' => 'dev@uplide-laravel.com',
                 'phone' => '905326767231',
                 'phone_code' => '+90',
                 'password' => USER_PASSWORD,

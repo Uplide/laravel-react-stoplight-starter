@@ -2,7 +2,7 @@ import { FetchListParams } from "@base/enums/api.interface";
 import api from "@base/helpers/enhencers/Interceptor";
 import {
     IAdminCreateRequest,
-    IAdminResponseP,
+    IAdminResponse,
     IAdminUpdatePasswordRequest,
     IAdminUpdateRequest,
 } from "../models/admin.interface";
@@ -17,7 +17,7 @@ export function fetchAdmins({
     take,
     sort,
     filter,
-}: FetchListParams): Promise<PageableResponseModel<IAdminResponseP>> {
+}: FetchListParams): Promise<PageableResponseModel<IAdminResponse>> {
     return api.get(`${API_URL}/api/backoffice/${PREFIX}`, {
         params: {
             skip,
@@ -35,7 +35,7 @@ export function addAdmin(data: IAdminCreateRequest): Promise<any> {
 }
 
 // Get Single Admin
-export function getAdmin(id: number): Promise<IAdminResponseP> {
+export function getAdmin(id: number): Promise<IAdminResponse> {
     return api.get(`${API_URL}/api/backoffice/${PREFIX}/${id}`);
 }
 

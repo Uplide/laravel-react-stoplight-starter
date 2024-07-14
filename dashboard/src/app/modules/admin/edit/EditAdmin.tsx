@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import {
+    IAdmin,
     IAdminCreateRequest,
-    IAdminResponseP,
 } from "../core/models/admin.interface";
 import * as Yup from "yup";
 import { getAdmin, updateAdmin } from "../core/api/admin.request";
@@ -28,7 +28,7 @@ const validationSchema = Yup.object().shape({
 const EditAdmin = () => {
     const navigate = useNavigate();
     const { id: adminId } = useParams();
-    const [admin, setAdmin] = React.useState<IAdminResponseP | null>(null);
+    const [admin, setAdmin] = React.useState<IAdmin | null>(null);
     const [fetchStatus, setFetchStatus] = React.useState<FetchStatus>(
         FetchStatus.IDLE
     );
@@ -38,7 +38,7 @@ const EditAdmin = () => {
         if (adminId) {
             setFetchStatus(FetchStatus.LOADING);
             getAdmin(parseInt(adminId)).then((res) => {
-                setAdmin(res);
+                setAdmin(res.data);
                 setFetchStatus(FetchStatus.SUCCEEDED);
             });
         }
@@ -191,14 +191,14 @@ const EditAdmin = () => {
                                                 formik.setFieldValue(
                                                     "phone_code",
                                                     "+" +
-                                                        e.target.value
-                                                            .phone_code
+                                                    e.target.value
+                                                        .phone_code
                                                 );
                                             }}
                                             id="phone"
                                         />
                                         {formik.touched.phone &&
-                                        formik.errors.phone ? (
+                                            formik.errors.phone ? (
                                             <p className="mt-2 text-sm text-red-500">
                                                 {formik.errors.phone}
                                             </p>

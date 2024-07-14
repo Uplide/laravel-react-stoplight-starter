@@ -36,7 +36,6 @@ class AuthController extends Controller
             'last_activity' => now(),
             'token' => $token,
             'admin_id' => $auth->id, // Eğer mevcutsa
-            "role" => 4
         ]);
 
         return response()->json([

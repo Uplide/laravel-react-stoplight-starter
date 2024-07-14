@@ -25,7 +25,7 @@ class LoginRequest extends FormRequest
             /**
              * The credential admin email
              * @var string
-             * @example dev@uplidelaravel.com
+             * @example dev@uplide-laravel.com
              */
             'email' => 'required|email',
             /**

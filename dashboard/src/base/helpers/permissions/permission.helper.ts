@@ -10,7 +10,7 @@ interface JWTDecode {
 }
 
 export const hasPermissionMany = (access: string) => {
-    if (access.includes(ERole.Public)) return true;
+    if (access && access.includes(ERole.Public)) return true;
     const accessArr = access?.split(",");
     const accessToken =
         localStorage.getItem(AUTH_LOCAL_STORAGE_KEY) ??
@@ -24,7 +24,7 @@ export const hasPermissionMany = (access: string) => {
     );
 };
 export const hasPermission = (access: string) => {
-    if (access.includes(ERole.Public)) return true;
+    if (access && access.includes(ERole.Public)) return true;
     const accessToken =
         localStorage.getItem(AUTH_LOCAL_STORAGE_KEY) ??
         sessionStorage.getItem(AUTH_LOCAL_STORAGE_KEY) ??

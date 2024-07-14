@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { IAdminResponseP, IAdminRole } from "../core/models/admin.interface";
+import { IAdmin, IAdminRole } from "../core/models/admin.interface";
 import { getAdmin } from "../core/api/admin.request";
 import Loader from "@base/layout/components/loader/Loader";
 import toast from "react-hot-toast";
@@ -38,7 +38,7 @@ const AdminRole = () => {
 
     const [allRoles, setAllRoles] = useState<IAdminRole[]>([]);
     const [selectedRoles, setSelectedRoles] = useState<ERole[]>([]);
-    const [admin, setAdmin] = useState<IAdminResponseP | null>(null);
+    const [admin, setAdmin] = useState<IAdmin | null>(null);
     const [fetchStatus, setFetchStatus] = useState<FetchStatus>(
         FetchStatus.IDLE
     );
@@ -47,11 +47,11 @@ const AdminRole = () => {
     React.useEffect(() => {
         setFetchStatus(FetchStatus.LOADING);
         getAdminRoles(parseInt(adminId!)).then((res) => {
-            setAdminRoles(res);
+            setAdminRoles(res.data);
             setFetchStatus(FetchStatus.SUCCEEDED);
         });
         getAdmin(parseInt(adminId!)).then((res) => {
-            setAdmin(res);
+            setAdmin(res.data);
         });
     }, [adminId]);
 
@@ -72,7 +72,7 @@ const AdminRole = () => {
 
     React.useEffect(() => {
         getAllAdminRoles({ search: debouncedRoleSearch }).then((res) => {
-            setAllRoles(res);
+            setAllRoles(res.data);
         });
     }, [debouncedRoleSearch]);
 
@@ -170,7 +170,7 @@ const AdminRole = () => {
                         <TableColumn>YETKİ</TableColumn>
                     </TableHeader>
                     <TableBody className="p-0">
-                        {allRoles.map((row) => (
+                        {allRoles && allRoles.map((row) => (
                             <TableRow key={row.name}>
                                 <TableCell>{row.description}</TableCell>
                             </TableRow>

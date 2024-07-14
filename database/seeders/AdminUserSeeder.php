@@ -36,7 +36,7 @@ class AdminUserSeeder extends Seeder
             [
                 'name' => 'Royalmind',
                 'surname' => 'App',
-                'email' => 'dev@uplidelaravel.com',
+                'email' => 'dev@uplide-laravel.com',
                 'password' => ADMIN_PASSWORD,
             ],
             [

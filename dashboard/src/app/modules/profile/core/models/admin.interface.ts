@@ -1,13 +1,23 @@
-export interface IAdminResponseP {
-    email: string;
+export interface IAdminResponse {
+    data: IAdmin;
+}
+
+export interface IAdmin {
     name: string;
+    surname: string;
+    email: string;
+    phone?: string;
+    phone_code?: string;
     created_at: string;
     id: number;
 }
 
 export interface IAdminCreateRequest {
     name: string;
+    surname: string;
     email: string;
+    phone?: string;
+    phone_code?: string;
     password: string;
     password_confirmation: string;
 }
@@ -22,6 +32,10 @@ export interface IAdminUpdateRequest {
 export interface IAdminUpdatePasswordRequest {
     password: string;
     password_confirm: string;
+}
+
+export interface IAdminRoleResponse {
+    data: IAdminRole[];
 }
 
 export interface IAdminRole {

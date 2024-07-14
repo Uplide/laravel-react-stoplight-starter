@@ -19,22 +19,6 @@ use Illuminate\Support\Collection;
 class RoleController extends Controller
 {
     /**
-     * Get Roles
-     *
-     * Bu servis yöneticinin rollerini getirmesini sağlar
-     */
-    public function get(Request $request)
-    {
-        $id = intval(@$request->id ?? "0");
-        $roles = [];
-        $admin = Admin::where("id", $id)->with(['roles'])->first();
-        foreach ($admin->roles as $role) {
-            array_push($roles, $role->name);
-        }
-        return $roles;
-    }
-
-    /**
      * List Role
      *
      * Bu servis rolleri listelemek için kullanılmaktadır. Tüm rolleri getirir
@@ -53,35 +37,13 @@ class RoleController extends Controller
         }
 
         $search = @$request->search;
-        return Role::where(function ($query) use ($search) {
+        return ["data" => Role::where(function ($query) use ($search) {
             if ($search) {
                 $query->where('name', 'like', "%{$search}%")
                     ->orWhere('description', 'like', "%{$search}%");
             }
         })
             // ->whereIn("name", $roles)
-            ->get(["id", "name", "description"]);
-    }
-
-    /**
-     * Update Role
-     *
-     * Bu servis yöneticilerin rollerinin düzenlenmesini sağlar
-     */
-    public function update(AdminRoleUpdateRequest $request)
-    {
-        $id = intval($request->id ?? "0");
-        $roles = $request->roles ?? [];
-
-        $admin = Admin::with('roles')->findOrFail($id);
-        $newRoles = Role::whereIn('name', $roles)->get()->pluck('id')->toArray();
-        $admin->roles()->sync($newRoles);
-
-        Session::destroy(Session::where("admin_id", $admin->id)->pluck("id")->toArray());
-
-        return response()->json([
-            'status' => 'success',
-            'data' => $admin
-        ], 200);
+            ->get(["id", "name", "description"])];
     }
 }

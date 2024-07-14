@@ -1,4 +1,8 @@
-export interface IAdminResponseP {
+export interface IAdminResponse {
+    data: IAdmin;
+}
+
+export interface IAdmin {
     name: string;
     surname: string;
     email: string;
@@ -28,6 +32,10 @@ export interface IAdminUpdateRequest {
 export interface IAdminUpdatePasswordRequest {
     password: string;
     password_confirm: string;
+}
+
+export interface IAdminRoleResponse {
+    data: IAdminRole[];
 }
 
 export interface IAdminRole {

@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Backoffice;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backoffice\AdminRequest;
+use App\Http\Requests\Backoffice\AdminRoleUpdateRequest;
 use App\Http\Requests\Backoffice\AdminUpdateRequest;
 use App\Http\Resources\AdminResource;
 use App\Models\Admin;
+use App\Models\Role;
+use App\Models\Session;
 use Illuminate\Http\Request;
 use App\Modules\Filter\FilterService;
 use App\Modules\Filter\FilterTableRequest;
@@ -84,6 +87,22 @@ class AdminController extends Controller
     }
 
     /**
+     * Get Roles
+     *
+     * Bu servis yöneticinin rollerini getirmesini sağlar
+     */
+    public function getRoles(Request $request)
+    {
+        $id = intval(@$request->id ?? "0");
+        $roles = [];
+        $admin = Admin::where("id", $id)->with(['roles'])->first();
+        foreach ($admin->roles as $role) {
+            array_push($roles, $role->name);
+        }
+        return ["data" => $roles];
+    }
+
+    /**
      * Create Admin
      *
      * Bu servis yönetici oluşturmak için kullanılmaktadır.
@@ -139,6 +158,28 @@ class AdminController extends Controller
         return response()->json([
             'message' => 'Yönetici düzenlendi.',
         ], 201);
+    }
+
+    /**
+     * Update Role
+     *
+     * Bu servis yöneticilerin rollerinin düzenlenmesini sağlar
+     */
+    public function updateRoles(AdminRoleUpdateRequest $request)
+    {
+        $id = intval($request->id ?? "0");
+        $roles = $request->roles ?? [];
+
+        $admin = Admin::with('roles')->findOrFail($id);
+        $newRoles = Role::whereIn('name', $roles)->get()->pluck('id')->toArray();
+        $admin->roles()->sync($newRoles);
+
+        Session::destroy(Session::where("admin_id", $admin->id)->pluck("id")->toArray());
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $admin
+        ], 200);
     }
 
 

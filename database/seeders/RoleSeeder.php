@@ -29,6 +29,10 @@ class RoleSeeder extends Seeder
                 "description" => "View Admins"
             ],
             [
+                "name" => RoleTypes::ADMIN_VIEW_ROLE,
+                "description" => "View Admin Role"
+            ],
+            [
                 "name" => RoleTypes::ADMIN_CREATE,
                 "description" => "Create Admin"
             ],
@@ -41,9 +45,10 @@ class RoleSeeder extends Seeder
                 "description" => "Update Admin"
             ],
             [
-                "name" => RoleTypes::ADMIN_ROLE,
+                "name" => RoleTypes::ADMIN_UPDATE_ROLE,
                 "description" => "Update Admin Role"
             ],
+
             // User Management Roles
             [
                 "name" => RoleTypes::USER_VIEW,

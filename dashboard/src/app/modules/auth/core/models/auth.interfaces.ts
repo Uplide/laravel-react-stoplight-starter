@@ -11,9 +11,14 @@ export interface ILoginResponse {
 
 export interface ICurrentUser {
     data: {
-        id: number;
+        id: string;
         name: string;
+        surname: string;
         email: string;
+        phone?: string;
+        phone_code?: string;
+        password: string;
+        password_confirmation: string;
         created_at: string;
     };
 }
