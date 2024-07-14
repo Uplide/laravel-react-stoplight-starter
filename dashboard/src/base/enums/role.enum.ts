@@ -8,18 +8,15 @@ export class ERole {
     static readonly ADMIN_UPDATE_ROLE = "ADMIN_UPDATE_ROLE";
     static readonly ADMIN_DELETE = "ADMIN_DELETE";
 
-    static readonly PROJECT_VIEW = "PROJECT_VIEW";
-    static readonly PROJECT_CREATE = "PROJECT_CREATE";
-    static readonly PROJECT_UPDATE = "PROJECT_UPDATE";
-    static readonly PROJECT_DELETE = "PROJECT_DELETE";
+    static readonly USER_VIEW = "USER_VIEW";
+    static readonly USER_CREATE = "USER_CREATE";
+    static readonly USER_UPDATE = "USER_UPDATE";
+    static readonly USER_DELETE = "USER_DELETE";
 }
 
 export class ERolePath {
     static readonly "/anasayfa" = ERole.Public;
     static readonly "/hesabim" = ERole.Public;
-    static readonly "/projeler" = ERole.PROJECT_VIEW;
-    static readonly "/projeler/ekle" = ERole.Public;
-    static readonly "/projeler/old" = ERole.Public;
 
     static readonly "/yoneticiler" = ERole.ADMIN_VIEW;
     static readonly "/yoneticiler/ekle" = ERole.ADMIN_CREATE;

@@ -13,7 +13,6 @@ type BlockNoteEditorProps = {
 };
 
 function BlockNoteEditor({
-    blocks,
     setBlocks,
     imageUploadEnabled = true,
 }: Readonly<BlockNoteEditorProps>) {

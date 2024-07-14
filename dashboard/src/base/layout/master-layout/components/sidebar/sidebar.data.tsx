@@ -38,36 +38,6 @@ export const sidebarData: (ISidebarItem | ICollapseItem | ISidebarMenu)[] = [
         roles: `${ERole.ADMIN_VIEW}`,
     } as ISidebarItem,
     {
-        id: "company",
-        icon: (
-            <Icon
-                icon="mdi:company"
-                width="1rem"
-                height="1rem"
-                className="text-black dark:text-gray-200"
-            />
-        ),
-        title: "Şirketler",
-        to: "/sirketler",
-        type: "single",
-        roles: `${ERole.COMPANY_VIEW}`,
-    } as ISidebarItem,
-    {
-        id: "project",
-        icon: (
-            <Icon
-                icon="basil:box-solid"
-                width="1rem"
-                height="1rem"
-                className="text-black dark:text-gray-200"
-            />
-        ),
-        title: "Projeler",
-        to: "/projeler",
-        type: "single",
-        roles: `${ERole.PROJECT_VIEW}`,
-    } as ISidebarItem,
-    {
         id: "file-mananer",
         icon: (
             <Icon
