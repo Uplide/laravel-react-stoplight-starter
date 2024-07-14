@@ -65,7 +65,7 @@ export default function QuillEditor({
         try {
             setEditorHtml(null, name, html);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     };
 

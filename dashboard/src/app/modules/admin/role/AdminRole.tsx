@@ -67,7 +67,6 @@ const AdminRole = () => {
     }, [adminRoles, initialLoad, allRoles]);
 
     React.useEffect(() => {
-        console.log(selectedRoles);
     }, [selectedRoles]);
 
     React.useEffect(() => {
@@ -135,7 +134,7 @@ const AdminRole = () => {
                             }
                         }
                     }}
-                    onChange={(e) => console.log(e)}
+                    // onChange={(e) => console.log(e)}
                     topContent={
                         <div className="flex justify-between items-center w-full gap-3">
                             <div className="w-full">

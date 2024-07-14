@@ -154,8 +154,6 @@ export const DynamoFileManagerProvider: React.FC<
                     findDirectory(data, selectedDirectory) ||
                     data[0] ||
                     ({} as DynamoFileData);
-                console.log(data, "feuyya");
-                console.log(currentSelectedDirectory);
                 setSelectedDirectory(currentSelectedDirectory);
             })
             .catch(() => {

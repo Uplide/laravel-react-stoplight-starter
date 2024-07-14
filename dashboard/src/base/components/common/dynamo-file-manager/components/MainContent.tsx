@@ -59,7 +59,6 @@ function MainContent() {
 
     useEffect(() => {
         setValueRename(selectedRow?.name);
-        console.log(selectedRow);
     }, [selectedRow]);
 
     return (
@@ -260,8 +259,8 @@ function MainContent() {
                                                             files,
                                                             selectedDirectory
                                                         ) +
-                                                            "/" +
-                                                            item.name
+                                                        "/" +
+                                                        item.name
                                                     ).then(() => {
                                                         toast.success(
                                                             "File deleted successfully"
@@ -340,42 +339,42 @@ function MainContent() {
                             <ModalFooter>
                                 {config?.mainContent?.table?.modal
                                     ?.actionButtons?.cancel && (
-                                    <Button
-                                        className={
-                                            config?.mainContent?.table?.modal
-                                                ?.actionButtons?.cancel
-                                                ?.className
-                                        }
-                                        color="danger"
-                                        variant="light"
-                                        onPress={onClose}
-                                    >
-                                        {
-                                            config?.mainContent?.table?.modal
-                                                ?.actionButtons?.cancel?.title
-                                        }
-                                    </Button>
-                                )}
+                                        <Button
+                                            className={
+                                                config?.mainContent?.table?.modal
+                                                    ?.actionButtons?.cancel
+                                                    ?.className
+                                            }
+                                            color="danger"
+                                            variant="light"
+                                            onPress={onClose}
+                                        >
+                                            {
+                                                config?.mainContent?.table?.modal
+                                                    ?.actionButtons?.cancel?.title
+                                            }
+                                        </Button>
+                                    )}
                                 {config?.mainContent?.table?.modal
                                     ?.actionButtons?.pick && (
-                                    <Button
-                                        className={
-                                            config?.mainContent?.table?.modal
-                                                ?.actionButtons?.pick?.className
-                                        }
-                                        color="primary"
-                                        onPress={() => {
-                                            if (pickUrl && selectedRow?.url)
-                                                pickUrl(selectedRow?.url);
-                                            onClose();
-                                        }}
-                                    >
-                                        {
-                                            config?.mainContent?.table?.modal
-                                                ?.actionButtons?.pick?.title
-                                        }
-                                    </Button>
-                                )}
+                                        <Button
+                                            className={
+                                                config?.mainContent?.table?.modal
+                                                    ?.actionButtons?.pick?.className
+                                            }
+                                            color="primary"
+                                            onPress={() => {
+                                                if (pickUrl && selectedRow?.url)
+                                                    pickUrl(selectedRow?.url);
+                                                onClose();
+                                            }}
+                                        >
+                                            {
+                                                config?.mainContent?.table?.modal
+                                                    ?.actionButtons?.pick?.title
+                                            }
+                                        </Button>
+                                    )}
                             </ModalFooter>
                         </>
                     )}
@@ -404,45 +403,45 @@ function MainContent() {
                             <ModalFooter>
                                 {config?.mainContent?.table?.modal
                                     ?.actionButtons?.cancel && (
-                                    <Button
-                                        className={
-                                            config?.mainContent?.table?.modal
-                                                ?.actionButtons?.cancel
-                                                ?.className
-                                        }
-                                        color="danger"
-                                        variant="light"
-                                        onPress={onClose}
-                                    >
-                                        İptal
-                                    </Button>
-                                )}
+                                        <Button
+                                            className={
+                                                config?.mainContent?.table?.modal
+                                                    ?.actionButtons?.cancel
+                                                    ?.className
+                                            }
+                                            color="danger"
+                                            variant="light"
+                                            onPress={onClose}
+                                        >
+                                            İptal
+                                        </Button>
+                                    )}
                                 {config?.mainContent?.table?.modal
                                     ?.actionButtons?.pick && (
-                                    <Button
-                                        className={
-                                            config?.mainContent?.table?.modal
-                                                ?.actionButtons?.pick?.className
-                                        }
-                                        color="primary"
-                                        onPress={() => {
-                                            if (
-                                                renameFile &&
-                                                selectedRow?.path &&
-                                                valueRename !== undefined
-                                            ) {
-                                                renameFile(
-                                                    selectedRow.path,
-                                                    valueRename
-                                                );
+                                        <Button
+                                            className={
+                                                config?.mainContent?.table?.modal
+                                                    ?.actionButtons?.pick?.className
                                             }
+                                            color="primary"
+                                            onPress={() => {
+                                                if (
+                                                    renameFile &&
+                                                    selectedRow?.path &&
+                                                    valueRename !== undefined
+                                                ) {
+                                                    renameFile(
+                                                        selectedRow.path,
+                                                        valueRename
+                                                    );
+                                                }
 
-                                            onClose();
-                                        }}
-                                    >
-                                        Düzenle
-                                    </Button>
-                                )}
+                                                onClose();
+                                            }}
+                                        >
+                                            Düzenle
+                                        </Button>
+                                    )}
                             </ModalFooter>
                         </>
                     )}

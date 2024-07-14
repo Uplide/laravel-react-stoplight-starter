@@ -66,7 +66,6 @@ api.interceptors.response.use(
                         window.location.href = "/auth";
                     });
                 } else {
-                    console.log(error);
                     const backendError = error as BackendErrorTemplate;
                     swal.fire({
                         title: "Error",

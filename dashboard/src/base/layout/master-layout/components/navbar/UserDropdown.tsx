@@ -22,9 +22,9 @@ export const UserDropdown = () => {
                             name={
                                 currentUser?.data.name?.charAt(0) ??
                                 "" +
-                                    currentUser?.data.name
-                                        .split(" ")?.[1]
-                                        ?.charAt(0) ??
+                                currentUser?.data.name
+                                    .split(" ")?.[1]
+                                    ?.charAt(0) ??
                                 ""
                             }
                             showFallback
@@ -35,7 +35,7 @@ export const UserDropdown = () => {
             </NavbarItem>
             <DropdownMenu
                 aria-label="User menu actions"
-                onAction={(actionKey) => console.log({ actionKey })}
+            // onAction={(actionKey) => console.log({ actionKey })}
             >
                 <DropdownItem
                     key="profile"
